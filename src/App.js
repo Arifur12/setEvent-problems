@@ -2,17 +2,33 @@ import React, { useState } from "react";
 import "./App.css";
 import Events from "./components/Events";
 import Modal from "./components/Modal";
+import NewEventForm from "./components/NewEventForm";
 import Title from "./components/Title";
 
 function App() {
+  // key takeAWAYs
+  // filter is good for deleting and map is good to lay out the objects or array
+  // !operator for hiding
+  // never forget to pass props in components with ({})
+  
   const [showModal, setShowModal] = useState(false);
   const [showEvents, setShowEvents] = useState(true);
   const [events, setEvents] = useState([
-    { title: "Mario and Luigi", id: 1 },
-    { title: "Mario and DK", id: 2 },
-    { title: "Wario", id: 3 },
+    // { title: "Mario and Luigi", id: 1 },
+    // { title: "Mario and DK", id: 2 },
+    // { title: "Wario", id: 3 },
   ]);
-  console.log(showEvents);
+
+
+  const addEvent = (event) => {
+    setEvents((prevEvents)=>{
+      console.log(prevEvents);
+      return [...prevEvents, event]
+
+    })
+    
+    
+  }
   const handleClick = (id) => {
     setEvents((prevEvent) => {
       return prevEvent.filter((event) => {
@@ -56,8 +72,7 @@ function App() {
 
       {showModal && (
         <Modal handleClose={handleClose}>
-          <h2>get 10% off</h2>
-          <p>never BEEN more convenient</p>
+          <NewEventForm addEvent={addEvent}></NewEventForm>
         </Modal>
       )}
       {!showModal && (
